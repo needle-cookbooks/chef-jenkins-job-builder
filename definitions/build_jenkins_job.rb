@@ -9,7 +9,7 @@ define :build_jenkins_job, :delete => false, :config_path => '/etc/jenkins_jobs/
     ruby_block "update #{params[:name]} job config" do
       block do
         Chef::Log.info("build_jenkins_job: updating jobs from #{params[:job_config]}")
-        update_job = Chef::ShellOut.new("jenkins-jobs -c #{params[:config_path]} update #{params[:job_config]}").run_command
+        update_job = Chef::ShellOut.new("jenkins-jobs update #{params[:job_config]} -c #{params[:config_path]}").run_command
         Chef::Log.debug("build_jenkins_job: " + update_job.stderr.inspect)
       end
     end
@@ -17,7 +17,7 @@ define :build_jenkins_job, :delete => false, :config_path => '/etc/jenkins_jobs/
     ruby_block "delete #{params[:name]} job config" do
       block do
         Chef::Log.info("build_jenkins_job: deleting job #{params[:name]}")
-        delete_job = Chef::ShellOut.new("jenkins-jobs -c #{params[:config_path]} delete #{params[:name]}").run_command
+        delete_job = Chef::ShellOut.new("jenkins-jobs delete #{params[:name]} -c #{params[:config_path]}").run_command
         Chef::Log.debug("build_jenkins_job: " + delete_job.stderr.inspect)
       end
     end
