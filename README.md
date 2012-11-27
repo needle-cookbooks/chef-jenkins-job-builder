@@ -31,16 +31,16 @@ For example, you may create your own examplecorp-jenkins-jobs cookbook with a re
 include_recipe 'jenkins'
 include_recipe 'jenkins_job_builder'
 
-deploy '/opt/examplecorp-jenkins-jobs' do
+template '/opt/examplecorp-jenkins-jobs/widget.yaml' do
   # derp derp de derp
 end
 
 build_jenkins_job 'widget' do
-  job_config '/opt/examplecorp-jenkins-jobs/current/widget.yaml'
+  job_config '/opt/examplecorp-jenkins-jobs/widget.yaml'
 end
 ```
 
-This would effectively install the jenkins server, install jenkins-job-builder, deploy a repository of jenkins job configurations to /opt/examplecorp-jenkins-jobs and configure the Jenkins server with a job matching the configuration in the specified job_config file. 
+This would effectively install the jenkins server, install jenkins-job-builder, create a jenkins-job-builder yaml file from template and update the Jenkins server configuration with that yaml file. 
 
 The `build_jenkins_job` definition accepts the following parameters:
 * `job_config` -- path to a file or directory that `jenkins-job update` should be run against (required)
