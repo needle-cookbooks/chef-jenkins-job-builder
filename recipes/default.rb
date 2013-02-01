@@ -10,7 +10,7 @@ package yaml do
 end
 
 python_pip 'jenkins-job-builder' do
-  version '0.3.0'
+  version node['jenkins_job_builder']['version']
   action :install
 end
 
