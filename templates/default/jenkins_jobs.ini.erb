@@ -2,3 +2,7 @@
 user=<%= @username %>
 password=<%= @password %>
 url=<%= @url %>
+<%- if @hipchat_token -%>
+[hipchat]
+authtoken=<%= @hipchat_token %>
+<%- end -%>

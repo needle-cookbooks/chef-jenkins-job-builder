@@ -25,7 +25,10 @@ template '/etc/jenkins_jobs/jenkins_jobs.ini' do
   owner node['jenkins_job_builder']['user']
   group node['jenkins_job_builder']['group']
   mode '0640'
-  variables ({ :username => node['jenkins_job_builder']['username'],
-              :password => node['jenkins_job_builder']['password'],
-              :url => node['jenkins_job_builder']['url'] })
+  variables {
+    :username => node['jenkins_job_builder']['username'],
+    :password => node['jenkins_job_builder']['password'],
+    :url => node['jenkins_job_builder']['url'],
+    :hipchat_token => node['jenkins_job_builder']['hipchat_token']
+  }
 end
