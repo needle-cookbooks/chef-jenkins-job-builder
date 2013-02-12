@@ -9,9 +9,15 @@ package yaml do
   action :install
 end
 
-python_pip 'jenkins-job-builder' do
-  version node['jenkins_job_builder']['version']
-  action :install
+unless node['jenkins_job_builder']['from_source']
+  python_pip 'jenkins-job-builder' do
+    version node['jenkins_job_builder']['version']
+    action :install
+  end
+else
+  python_pip node['jenkins_job_builder']['repo'] do
+    action :install
+  end
 end
 
 directory '/etc/jenkins_jobs' do
@@ -29,6 +35,7 @@ template '/etc/jenkins_jobs/jenkins_jobs.ini' do
     :username => node['jenkins_job_builder']['username'],
     :password => node['jenkins_job_builder']['password'],
     :url => node['jenkins_job_builder']['url'],
+    :external_url => node['jenkins']['server']['url'],
     :hipchat_token => node['jenkins_job_builder']['hipchat_token']
   })
 end
