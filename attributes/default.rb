@@ -1,5 +1,8 @@
 default['jenkins_job_builder']['user'] = 'nobody'
-default['jenkins_job_builder']['group'] = 'nogroup'
+default['jenkins_job_builder']['group'] = value_for_platform_family(
+  ['debian'] => "nogroup",
+  ['rhel','fedora','suse'] => "nobody"
+)
 default['jenkins_job_builder']['username'] = String.new
 default['jenkins_job_builder']['password'] = String.new
 default['jenkins_job_builder']['url'] = 'http://jenkins.example.com'
