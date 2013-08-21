@@ -2,8 +2,12 @@ include_recipe 'python'
 
 yaml = value_for_platform_family({
   ['debian'] => 'libyaml-dev',
-  ['rhel','fedora','suse'] => 'libyaml'
+  ['rhel','fedora','suse'] => 'libyaml-devel'
 })
+
+if platform_family?('rhel')
+  include_recipe 'yum::epel'
+end
 
 package yaml do
   action :install
