@@ -1,6 +1,6 @@
 # jenkins-job-builder
 
-The OpenStack [jenkins-job-builder](https://github.com/openstack-ci/jenkins-job-builder) project provides a very useful tool that enables storing Jenkins job configuration as code.
+The OpenStack [jenkins-job-builder](https://github.com/openstack-infra/jenkins-job-builder) project provides a very useful tool that enables storing Jenkins job configuration as code.
 
 This cookbook installs and configures jenkins-job-builder, as well as providing a `build_jenkins_job` definition which runs jenkins-job-builder against a given file or directory.
 
