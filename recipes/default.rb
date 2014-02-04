@@ -13,6 +13,15 @@ package yaml do
   action :install
 end
 
+ohai "python-version" do
+  plugin "python"
+  action :reload
+end
+
+if Gem::Version.new(node['languages']['python']['version']) < Gem::Version.new("2.7")
+  python_pip "argparse"
+end
+
 unless node['jenkins_job_builder']['from_source']
   python_pip 'jenkins-job-builder' do
     version node['jenkins_job_builder']['version']
